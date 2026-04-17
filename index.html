@@ -93,12 +93,13 @@
     border: 1px solid var(--border);
     border-radius: 14px;
     overflow: hidden;
+    cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
 
   .card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 12px 32px rgba(28,26,23,0.08);
+    box-shadow: 0 12px 32px rgba(28,26,23,0.1);
   }
 
   .photo-wrap {
@@ -119,21 +120,6 @@
 
   .card:hover .photo-wrap img {
     transform: scale(1.04);
-  }
-
-  .photo-placeholder {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #EDE8E0;
-  }
-
-  .photo-placeholder svg {
-    opacity: 0.2;
-    width: 48px;
-    height: 48px;
   }
 
   .badge {
@@ -174,6 +160,143 @@
     font-size: 14px;
     font-weight: 500;
     color: var(--accent);
+  }
+
+  /* Mobile tap-to-expand */
+  @media (max-width: 768px) {
+    .grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .card {
+      cursor: pointer;
+      transition: box-shadow 0.35s ease;
+    }
+
+    .photo-wrap {
+      transition: aspect-ratio 0.35s ease;
+    }
+
+    .photo-wrap img {
+      transition: transform 0.35s ease;
+    }
+
+    .card.expanded {
+      grid-column: 1 / -1;
+      box-shadow: 0 16px 48px rgba(28,26,23,0.13);
+    }
+
+    .card.expanded .photo-wrap {
+      aspect-ratio: 16/9;
+    }
+
+    .card.expanded .pizza-name {
+      font-size: 19px;
+    }
+
+    .card.expanded .pizza-desc {
+      font-size: 14px;
+    }
+
+    .card.expanded .pizza-price {
+      font-size: 15px;
+    }
+  }
+
+  /* Appetizer & dessert cards */
+  .side-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .side-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(28,26,23,0.08);
+  }
+
+  /* Sauce scroll strip */
+  .sauce-strip-wrap {
+    margin-bottom: 1.5rem;
+  }
+
+  .sauce-strip-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.9rem;
+  }
+
+  .sauce-strip {
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    padding-bottom: 12px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-snap-type: x mandatory;
+  }
+
+  .sauce-strip::-webkit-scrollbar { display: none; }
+
+  .sauce-item {
+    flex: 0 0 120px;
+    scroll-snap-align: start;
+    text-align: center;
+  }
+
+  .sauce-bowl {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 8px;
+    border: 1.5px solid var(--border);
+    box-shadow: 0 4px 14px rgba(28,26,23,0.09);
+    background: #EDE8E0;
+  }
+
+  .sauce-bowl img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .sauce-item:hover .sauce-bowl img { transform: scale(1.06); }
+
+  .sauce-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--charcoal);
+    margin-bottom: 3px;
+  }
+
+  .sauce-note {
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  @media (max-width: 768px) {
+    .side-card {
+      cursor: pointer;
+      transition: box-shadow 0.35s ease;
+    }
+    .side-card.expanded {
+      grid-column: 1 / -1;
+      box-shadow: 0 16px 48px rgba(28,26,23,0.13);
+    }
+    .side-card.expanded .photo-wrap {
+      aspect-ratio: 16/9;
+    }
   }
 
   /* Footer */
@@ -239,7 +362,7 @@
 
     <div class="card">
       <div class="photo-wrap">
-        <img src="cheese.jpg" alt="Cheese pizza" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=600&q=80" alt="Cheese pizza" loading="lazy">
       </div>
       <div class="info">
         <div class="pizza-name">Cheese</div>
@@ -250,7 +373,7 @@
 
     <div class="card">
       <div class="photo-wrap">
-        <img src="github.com/farmspizza-io/menu-grid-website/blob/main/pepperoni.jpg" alt="Pepperoni pizza" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1628840042765-356cda07504e?w=600&q=80" alt="Pepperoni pizza" loading="lazy">
         <span class="badge">Fan Fave</span>
       </div>
       <div class="info">
@@ -291,7 +414,7 @@
 
     <div class="card">
       <div class="photo-wrap">
-        <img src="elote.jpg" alt="Kickin' Elote pizza" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1511689660979-10d2b1eccbc3?w=600&q=80" alt="Kickin' Elote pizza" loading="lazy">
         <span class="badge">Veggie</span>
       </div>
       <div class="info">
@@ -319,7 +442,7 @@
 
     <div class="card">
       <div class="photo-wrap">
-        <img src="bbq.jpg" alt="BBQ Chicken pizza" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1595854341625-f33ee10dbf9f?w=600&q=80" alt="BBQ Chicken pizza" loading="lazy">
       </div>
       <div class="info">
         <div class="pizza-name">BBQ Chicken</div>
@@ -354,7 +477,7 @@
 
     <div class="card">
       <div class="photo-wrap">
-        <img src="combo.jpg" alt="Farms Combo pizza" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80" alt="Farms Combo pizza" loading="lazy">
         <span class="badge">Signature</span>
       </div>
       <div class="info">
@@ -388,7 +511,7 @@
 
     <div class="card">
       <div class="photo-wrap">
-        <img src="masala.jpg" alt="Masala Pizza" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1585325701956-60dd9c8553bc?w=600&q=80" alt="Masala Pizza" loading="lazy">
         <span class="badge">Signature</span>
       </div>
       <div class="info">
@@ -415,6 +538,111 @@
     </div>
 
   </div>
+
+  <!-- Appetizers -->
+  <p class="section-label">Appetizers</p>
+
+  <!-- Wings with sauce scroll -->
+  <div class="sauce-strip-wrap">
+    <div class="side-card" style="margin-bottom:1.25rem;">
+      <div class="photo-wrap">
+        <img src="https://images.unsplash.com/photo-1567620832903-9fc6debc209f?w=600&q=80" alt="Chicken Wings" loading="lazy">
+      </div>
+      <div class="info">
+        <div class="pizza-name">Chicken Wings</div>
+        <div class="pizza-desc">Crispy wings seasoned and fried to golden perfection, served piping hot. Pick your flavor below.</div>
+        <div class="pizza-price">From $9.99</div>
+      </div>
+    </div>
+
+    <p class="sauce-strip-label">Choose your flavor</p>
+    <div class="sauce-strip">
+
+      <div class="sauce-item">
+        <div class="sauce-bowl">
+          <img src="https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?w=300&q=80" alt="Mango Habanero sauce" loading="lazy">
+        </div>
+        <div class="sauce-name">Mango Habanero</div>
+        <div class="sauce-note">Sweet heat with a tropical kick</div>
+      </div>
+
+      <div class="sauce-item">
+        <div class="sauce-bowl">
+          <img src="https://images.unsplash.com/photo-1587049352851-8d4e89133924?w=300&q=80" alt="Hot Honey sauce" loading="lazy">
+        </div>
+        <div class="sauce-name">Hot Honey</div>
+        <div class="sauce-note">Sticky, spicy, and a little sweet</div>
+      </div>
+
+      <div class="sauce-item">
+        <div class="sauce-bowl">
+          <img src="https://images.unsplash.com/photo-1558818498-28c1e002b655?w=300&q=80" alt="BBQ sauce" loading="lazy">
+        </div>
+        <div class="sauce-name">BBQ</div>
+        <div class="sauce-note">Smoky and rich, deeply savory</div>
+      </div>
+
+      <div class="sauce-item">
+        <div class="sauce-bowl">
+          <img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=300&q=80" alt="Buffalo sauce" loading="lazy">
+        </div>
+        <div class="sauce-name">Buffalo</div>
+        <div class="sauce-note">Tangy, bold, classically spicy</div>
+      </div>
+
+      <div class="sauce-item">
+        <div class="sauce-bowl">
+          <img src="https://images.unsplash.com/photo-1574484284002-952d92456975?w=300&q=80" alt="Garlic Parmesan sauce" loading="lazy">
+        </div>
+        <div class="sauce-name">Garlic Parm</div>
+        <div class="sauce-note">Creamy garlic with aged parmesan</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Garlic Country Sticks -->
+  <div class="grid">
+    <div class="side-card">
+      <div class="photo-wrap">
+        <img src="https://images.unsplash.com/photo-1619881590738-a111d176d906?w=600&q=80" alt="Garlic Country Sticks" loading="lazy">
+      </div>
+      <div class="info">
+        <div class="pizza-name">Garlic Country Sticks</div>
+        <div class="pizza-desc">Thick signature crust brushed generously with garlic butter and blanketed in melted cheddar. Golden-baked until perfectly gooey and crisp at the edges.</div>
+        <div class="pizza-price">$7.99</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Desserts -->
+  <p class="section-label">Desserts</p>
+  <div class="grid">
+
+    <div class="side-card">
+      <div class="photo-wrap">
+        <img src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=600&q=80" alt="Tiramisu" loading="lazy">
+      </div>
+      <div class="info">
+        <div class="pizza-name">Tiramisu</div>
+        <div class="pizza-desc">Classic Italian layers of espresso-soaked ladyfingers and creamy mascarpone, finished with a dusting of cocoa. Light, rich, and perfectly balanced.</div>
+        <div class="pizza-price">$8.99</div>
+      </div>
+    </div>
+
+    <div class="side-card">
+      <div class="photo-wrap">
+        <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=600&q=80" alt="Friday Night Toffee" loading="lazy">
+        <span class="badge">Fan Fave</span>
+      </div>
+      <div class="info">
+        <div class="pizza-name">Friday Night Toffee</div>
+        <div class="pizza-desc">A buttery toffee bundt cake served warm with a scoop of vanilla bean ice cream melting over the top. The perfect ending to any night.</div>
+        <div class="pizza-price">$8.99</div>
+      </div>
+    </div>
+
+  </div>
 </main>
 
 <footer>
@@ -422,6 +650,21 @@
   <a href="tel:9164095092">(916) 409-5092</a></p>
   <a class="order-btn" href="https://www.farmspizza.com/order">Order Online →</a>
 </footer>
+
+<script>
+  if (window.matchMedia('(max-width: 768px)').matches) {
+    document.querySelectorAll('.card, .side-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const wasExpanded = card.classList.contains('expanded');
+        document.querySelectorAll('.card.expanded, .side-card.expanded').forEach(c => c.classList.remove('expanded'));
+        if (!wasExpanded) {
+          card.classList.add('expanded');
+          card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      });
+    });
+  }
+</script>
 
 </body>
 </html>
